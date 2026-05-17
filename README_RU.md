@@ -162,6 +162,7 @@ Windows
 
 ## Логирование
 Логи сохраняются в: logs/general.log
+
 Реализовано:
 - structured logging;
 - daily rotation;
