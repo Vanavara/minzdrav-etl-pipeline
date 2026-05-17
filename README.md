@@ -64,6 +64,7 @@ Hashdiff is calculated as SHA256 from concatenated business attributes:
 - address
 - ved_affiliation_id
 - inclusion_date
+
 If at least one attribute changes, a new Satellite record is created.
 
 ### Tracking Satellite
