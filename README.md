@@ -122,10 +122,15 @@ Because of this, automatic downloading is implemented using browser automation w
 ## Technologies
 
 ### Backend
-- Python 3.12
 - SQLAlchemy 2.0
 - Alembic
 - PostgreSQL
+
+### Python Version
+Project requires Python 3.11 or higher.
+Recommended version:
+- Python 3.12
+
 
 ### ETL / Parsing
 - ijson
@@ -143,9 +148,12 @@ Because of this, automatic downloading is implemented using browser automation w
 
 ### 1. Clone repository
 - git clone https://github.com/Vanavara/minzdrav-etl-pipeline
-- cd minzdrav
 
 ### 2. Create virtual environment
+MacOS / Linux
+python3 -m venv .venv
+
+Windows
 python -m venv .venv
 
 ### 3. Activate virtual environment
@@ -158,13 +166,16 @@ Windows
 ### 4. Install dependencies
 pip install -r requirements.txt
 
-## Environment Configuration
+### 5. Environment Configuration
 Create .env base on .env.example
 
-## Apply Migrations
+### 6. Run PostgreSQL
+docker compose up -d
+
+## 7. Apply Migrations
 alembic upgrade head
 
-## Run Pipeline
+### 8.  Run Pipeline
 python -m src.loader
 
 ## Logging

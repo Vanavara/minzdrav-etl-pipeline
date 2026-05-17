@@ -116,10 +116,15 @@ Hashdiff вычисляется как SHA256 от конкатенации би
 
 ## Используемые технологии
 ### Backend
-- Python 3.12
+
 - SQLAlchemy 2.0
 - Alembic
 - PostgreSQL
+
+### Python Version
+Для работы проекта требуется Python 3.11 или выше.
+Рекомендуемая версия:
+- Python 3.12
 
 ### ETL / Parsing
 - ijson
@@ -136,28 +141,34 @@ Hashdiff вычисляется как SHA256 от конкатенации би
 ## Установка
 ### 1. Клонирование проекта
 - git clone https://github.com/Vanavara/minzdrav-etl-pipeline
-- cd minzdrav
 
 ### 2. Создание virtualenv
-- python -m venv .venv
+MacOS / Linux
+python3 -m venv .venv
+
+Windows
+python -m venv .venv
 
 ### 3. Активация virtualenv
 MacOS / Linux
-- source .venv/bin/activate
+source .venv/bin/activate
 
 Windows
-- .venv\Scripts\activate
+.venv\Scripts\activate
 
 ### 4. Установка зависимостей
 - pip install -r requirements.txt
 
-## Настройка ENV
+### 5. Настройка ENV
 - Создать .env по шаблону .env.example
 
-## Применение миграций
+### 6. Запустить PostgreSQL
+docker compose up -d
+
+### 7. Применение миграций
 - alembic upgrade head
 
-## Запуск pipeline
+### 8. Запуск pipeline
 - python -m src.loader
 
 ## Логирование
