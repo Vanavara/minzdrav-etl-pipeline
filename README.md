@@ -162,7 +162,7 @@ pip install -r requirements.txt
 Create .env base on .env.example
 
 ## Apply Migrations
-alembic upgrade head\
+alembic upgrade head
 
 ## Run Pipeline
 python -m src.loader
