@@ -1,8 +1,7 @@
 # Minzdrav NSI ETL Pipeline
 
 ## Описание проекта
-
-## Проект реализует ETL-пайплайн для загрузки и обработки справочника медицинских организаций из НСИ Минздрава РФ.
+Проект реализует ETL-пайплайн для загрузки и обработки справочника медицинских организаций из НСИ Минздрава РФ.
 
 ## Пайплайн:
 - автоматически определяет актуальную версию справочника;
@@ -26,10 +25,10 @@
 
 ## Data Vault модель
 
-## RAW Layer
+### RAW Layer
 Таблица: nsi.raw_medical_organizations
 
-### Содержит:
+Содержит:
 - полную историю всех загрузок;
 - исходные JSON-данные;
 - source_version;
@@ -38,23 +37,24 @@
 ## HUB
 Таблица: nsi.hub_organization
 
-### Содержит:
+Содержит:
 - бизнес-ключ организации (oid);
 - стабильный hash key;
 - источник данных.
 
-### HUB key
+## HUB key
 Hash key вычисляется как: sha256(oid)
 
-Satellite Attributes
+## Satellite Attributes
 Таблица: nsi.sat_organization_attrs
 
-### Содержит:
+Содержит:
 - описательные атрибуты организации;
 - hashdiff;
 - исторические версии атрибутов.
 
-### Hashdiff вычисляется как SHA256 от конкатенации бизнес-атрибутов:
+### Hashdiff 
+Hashdiff вычисляется как SHA256 от конкатенации бизнес-атрибутов:
 - full_name
 - short_name
 - ogrn
@@ -67,19 +67,19 @@ Satellite Attributes
 ## Tracking Satellite
 Таблица: nsi.sat_organization_changes
 
-### Содержит:
+Содержит:
 - историю изменения отдельных атрибутов;
 - valid_from;
 - valid_to;
 - текущее активное значение атрибута.
 
-### Историзация изменений
+## Историзация изменений
 При изменении значения атрибута:
-предыдущая запись закрывается;
-valid_to заполняется;
-создаётся новая активная запись.
+- предыдущая запись закрывается;
+- valid_to заполняется;
+- создаётся новая активная запись.
 
-### Особенности реализации historization
+## Особенности реализации historization
 Исходная система НСИ не предоставляет:
 - business effective date;
 - дату фактического изменения атрибутов;
@@ -88,7 +88,7 @@ valid_to заполняется;
 Из-за этого historization реализована на основе технического времени загрузки (load timestamp approach).
 
 
-### Почему используется TIMESTAMP вместо DATE
+## Почему используется TIMESTAMP вместо DATE
 Первоначально valid_from / valid_to были реализованы как DATE.
 Однако при загрузке нескольких версий справочника в течение одного календарного дня возникала проблема:
 - обе версии получали одинаковую дату;
@@ -100,37 +100,36 @@ valid_to заполняется;
 - последовательные версии справочника;
 - временные интервалы SCD Type 2.
 
-### Идемпотентность
+## Идемпотентность
 Перед загрузкой выполняется проверка: source_version already loaded?
 Если версия уже присутствует в RAW layer:
 - pipeline завершается;
 - повторная загрузка не выполняется.
 
-### Источник данных
+## Источник данных
 Используется публичный web-интерфейс НСИ Минздрава РФ.
 
-### Важное замечание по API
+## Важное замечание по API
 В рамках исследования ресурса был найден endpoint получения metadata справочника.
 Однако прямой endpoint скачивания ZIP-архива через Network/API обнаружен не был.
 Из-за этого автоматическая загрузка реализована через browser automation с использованием Playwright.
 
-### Используемые технологии
-
-Backend
+## Используемые технологии
+### Backend
 - Python 3.12
 - SQLAlchemy 2.0
 - Alembic
 - PostgreSQL
 
-ETL / Parsing
+### ETL / Parsing
 - ijson
 - Playwright
 
-Testing
+### Testing
 - pytest
 - unittest.mock
 
-Logging
+### Logging
 - logging
 - TimedRotatingFileHandler
 
@@ -152,33 +151,32 @@ Windows
 ### 4. Установка зависимостей
 - pip install -r requirements.txt
 
-
-### Настройка ENV
+## Настройка ENV
 -Создать .env по шаблону .env.example
 
-### Применение миграций
+## Применение миграций
 - alembic upgrade head
 
-### Запуск pipeline
+## Запуск pipeline
 - python -m src.loader
 
-### Логирование
+## Логирование
 Логи сохраняются в: logs/general.log
 Реализовано:
 - structured logging;
 - daily rotation;
 - хранение истории логов.
 
-### Тестирование
+## Тестирование
 Запуск тестов: pytest
 
-Реализованные тесты:
+### Реализованные тесты:
 
 API
 - API available
 - timeout handling
 - retry handling
-- 
+
 Idempotency
 - same version skipped
 - new version triggers load
@@ -194,7 +192,7 @@ Historization
 - unchanged attributes ignored
 - temporal interval consistency
 
-Основные особенности реализации
+## Основные особенности реализации
 - incremental loading;
 - idempotent ETL;
 - Data Vault 2.0;
