@@ -87,6 +87,7 @@ The NSI source system does not provide:
 - business effective dates;
 - real attribute change timestamps;
 - historical API support.
+
 Because of this, historization is implemented using technical load timestamps (load timestamp approach).
 
 
