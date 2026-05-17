@@ -143,6 +143,7 @@ Because of this, automatic downloading is implemented using browser automation w
 
 ### 1. Clone repository
 git clone ttps://github.com/Vanavara/minzdrav-etl-pipeline
+
 cd minzdrav
 
 ### 2. Create virtual environment
