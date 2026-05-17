@@ -129,7 +129,6 @@ def main():
     # download dictionary
     zip_path, source_version = download_dictionary(
         version=None,
-        # version="6.1998",
         file_format="JSON",
     )
 
