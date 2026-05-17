@@ -142,7 +142,7 @@ Because of this, automatic downloading is implemented using browser automation w
 ## Installation
 
 ### 1. Clone repository
-git clone ttps://github.com/Vanavara/minzdrav-etl-pipeline
+git clone https://github.com/Vanavara/minzdrav-etl-pipeline
 
 cd minzdrav
 
