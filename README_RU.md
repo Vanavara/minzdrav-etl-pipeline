@@ -139,7 +139,7 @@ Hashdiff вычисляется как SHA256 от конкатенации би
 - cd minzdrav
 
 ### 2. Создание virtualenv
--python -m venv .venv
+- python -m venv .venv
 
 ### 3. Активация virtualenv
 MacOS / Linux
@@ -152,7 +152,7 @@ Windows
 - pip install -r requirements.txt
 
 ## Настройка ENV
--Создать .env по шаблону .env.example
+- Создать .env по шаблону .env.example
 
 ## Применение миграций
 - alembic upgrade head
