@@ -157,7 +157,11 @@ Windows
 .venv\Scripts\activate
 
 ### 4. Установка зависимостей
-- pip install -r requirements.txt
+#### Upgrade pip
+pip install --upgrade pip
+
+#### Install project requirements
+pip install -r requirements.txt
 
 ### 5. Настройка ENV
 - Создать .env по шаблону .env.example

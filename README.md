@@ -164,6 +164,11 @@ Windows
 .venv\Scripts\activate
 
 ### 4. Install dependencies
+
+#### Upgrade pip
+pip install --upgrade pip
+
+#### Install project requirements
 pip install -r requirements.txt
 
 ### 5. Environment Configuration
