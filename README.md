@@ -226,3 +226,25 @@ Historization
 - retry mechanism;
 - structured logging;
 - automated testing.
+
+## Основные особенности реализации
+- incremental loading;
+- idempotent ETL;
+- Data Vault 2.0;
+- historization;
+- SCD Type 2 behavior;
+- browser automation ingestion;
+- retry mechanism;
+- structured logging;
+- automated testing.
+
+
+## Known Issues
+
+### ijson installation on MacOS
+
+In some MacOS environments `ijson` auto installation may fail during dependency setup.
+
+Possible solution:
+
+pip install ijson

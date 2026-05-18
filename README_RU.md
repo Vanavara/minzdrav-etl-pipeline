@@ -218,3 +218,16 @@ Historization
 - retry mechanism;
 - structured logging;
 - automated testing.
+
+
+
+## Известные особенности установки
+
+### Установка ijson на MacOS
+
+В некоторых окружениях MacOS автоматическая установка библиотеки `ijson`
+может завершаться ошибкой во время установки зависимостей.
+
+Возможное решение:
+
+pip install ijson
